@@ -49,7 +49,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-py${{ matrix.python-version }}-
 
-    - name: Clone Template React UI Repo
+    - name: Clone Lightning repo
       uses: actions/checkout@v3
       with:
         repository: PyTorchLightning/lightning
@@ -74,6 +74,9 @@ jobs:
       shell: bash
 
     - name: Tests
+      env:
+        TEST_EMAIL_ADDRESS: ${{secrets.TEST_EMAIL_ADDRESS}}
+        TEST_EMAIL_PASSWORD: ${{secrets.TEST_EMAIL_PASSWORD}}
       run: |
         coverage run --source lit_email -m py.test lit_email tests -v --junitxml=junit/test-results-${{ runner.os }}-${{ matrix.python-version }}.xml
 
