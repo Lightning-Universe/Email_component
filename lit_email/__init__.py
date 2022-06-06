@@ -1,3 +1,3 @@
-from lit_email.component import TemplateComponent
+from lit_email.component import LitEmail
 
-__all__ = ["TemplateComponent"]
+__all__ = ["LitEmail"]
