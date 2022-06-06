@@ -1,13 +1,21 @@
-r"""
-To test a lightning component:
-
-1. Init the component.
-2. call .run()
-"""
-from lit_email.component import TemplateComponent
+import os
+from lit_email import LitEmail
+import io
+from contextlib import redirect_stdout
 
 
-def test_placeholder_component():
-    messenger = TemplateComponent()
-    messenger.run()
-    assert messenger.value == 1
+def test_send_message():
+    email = os.environ['TEST_EMAIL_ADDRESS']
+    password = os.environ['TEST_EMAIL_PASSWORD']
+
+    emailer = LitEmail(email, password)
+
+    with io.StringIO() as buf, redirect_stdout(buf):
+        emailer.send(
+            to_emails=[os.environ['TEST_EMAIL_ADDRESS']],
+            subject='Hello from ⚡ Lightning CI/CD ⚡',
+            body='test body'
+        )
+        output = buf.getvalue()
+        print(output)
+        assert 'sent!' in output
