@@ -21,7 +21,7 @@ To create an app password, go to your [account dashboard](https://myaccount.goog
 ![enable 2-factor auth](/images/1_two_factor.jpg)
 
 2. Create an app password
-![enable 2-factor auth](/images/1_two_factor.jpg)
+![enable 2-factor auth](/images/2_app_secret.jpg)
 
 
 ## 3. Use the component like this
