@@ -8,12 +8,12 @@ import lightning as L
 logger = logging.getLogger(__name__)
 
 
-class LitEmail(L.LightningWork):
+class LitEmail(L.LightningFlow):
     def __init__(
-        self, 
-        email: str, 
-        password: List[str], 
-        smtp_server: str = 'smtp.gmail.com', 
+        self,
+        email: str,
+        password: List[str],
+        smtp_server: str = 'smtp.gmail.com',
         smtp_port: int = 465
     ) -> None:
 
@@ -26,7 +26,7 @@ class LitEmail(L.LightningWork):
         if smtp_server is None:
             self.smtp_server = 'smtp.gmail.com'
             m = f"""
-            smtp_server not specified. Using smtp.gmail.com as the default. 
+            smtp_server not specified. Using smtp.gmail.com as the default.
             if your email provider is not gmail, please find the smtp_server
 
             (try googling: 'smtp server for @yourDomain.com')
@@ -59,7 +59,7 @@ class LitEmail(L.LightningWork):
             server.sendmail(sent_from, to_emails, msg.as_string())
             server.close()
 
-            print('email sent!')
+            logger.info('email sent!')
         except Exception as e:
-            print('failed to send email...')
-            print(e)
+            logger.error('failed to send email...')
+            logger.error(e)
