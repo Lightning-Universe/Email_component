@@ -42,7 +42,7 @@ jobs:
         TEST_EMAIL_ADDRESS: ${{secrets.TEST_EMAIL_ADDRESS}}
         TEST_EMAIL_PASSWORD: ${{secrets.TEST_EMAIL_PASSWORD}}
       run: |
-        coverage run --source lit_email -m py.test lit_email tests -v --junitxml=junit/test-results-${{ runner.os }}-${{ matrix.python-version }}.xml
+        coverage run --source lit_email -m pytest lit_email tests -v --junitxml=junit/test-results-${{ runner.os }}-${{ matrix.python-version }}.xml
 
     - name: Statistics
       if: success()
